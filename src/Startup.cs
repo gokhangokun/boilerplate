@@ -27,7 +27,7 @@ namespace {solutionName}
             services.AddMvc();
             services.AddSwaggerGen(c =>
            {
-               c.SwaggerDoc("v1", new Info { Title = "Trendyol Web Search Gateway", Version = "v1" });
+               c.SwaggerDoc("v1", new Info { Title = "{solutionName}", Version = "v1" });
                c.DescribeAllEnumsAsStrings();
                c.DescribeStringEnumsInCamelCase();
                c.IgnoreObsoleteActions();
@@ -47,7 +47,7 @@ namespace {solutionName}
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Trendyol Web Search Gateway V1");
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "{solutionName} V1");
                 c.InjectOnCompleteJavaScript("");
             });
         }
