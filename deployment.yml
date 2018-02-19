@@ -1,0 +1,56 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: {deploymentName}
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: {solutionShortName}
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: {solutionShortName}
+    spec:
+      terminationGracePeriodSeconds: 30
+      containers:
+      - name: {solutionShortName}-container
+        image: sfrontregistry.trendyol.com/{solutionName}:ci-${BRANCH_NAME}-${BUILD_NUMBER}
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: ASPNETCORE_ENVIRONMENT
+          valueFrom:
+            configMapKeyRef:
+              name: {solutionShortName}-environment-config
+              key: ASPNETCORE_ENVIRONMENT
+        ports:
+        - name: {solutionShortName}-port
+          containerPort: 5023
+        readinessProbe:
+          successThreshold: 1
+          failureThreshold: 3
+          httpGet:
+            path: /healthcheck
+            port: {solutionShortName}-port
+            scheme: HTTP
+          initialDelaySeconds: 15
+          periodSeconds: 5
+          timeoutSeconds: 30
+        livenessProbe:
+          successThreshold: 1
+          failureThreshold: 3
+          httpGet:
+            path: /healthcheck
+            port: {solutionShortName}-port
+            scheme: HTTP
+          initialDelaySeconds: 20
+          periodSeconds: 10
+          timeoutSeconds: 30
+      imagePullSecrets:
+        - name: nexus-sfront-registry
+      restartPolicy: Always
