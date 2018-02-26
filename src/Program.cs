@@ -20,7 +20,7 @@ namespace {solutionName}
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
-                .UseUrls("http://0.0.0.0:5023")
+                .UseUrls("http://localhost:5023/swagger")
                 .Build();
     }
 }

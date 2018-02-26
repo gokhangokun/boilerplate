@@ -48,7 +48,6 @@ namespace {solutionName}
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "{solutionName} V1");
-                c.InjectOnCompleteJavaScript("");
             });
         }
     }

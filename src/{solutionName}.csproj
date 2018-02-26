@@ -7,7 +7,8 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.5"/>
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="1.1.0"/>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="2.1.0"/>
+    <PackageReference Include="Sillycore.Web" Version="0.13.0"/>
   </ItemGroup>
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.2"/>
